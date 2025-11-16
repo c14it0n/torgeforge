@@ -1,0 +1,62 @@
+[package]
+name = "vanity-onion-v3"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "A CLI tool to generate vanity .onion v3 addresses for Tor hidden services"
+license = "MIT"
+
+[[bin]]
+name = "torge-forge"
+path = "src/main_interactive.rs"
+
+[[bin]]
+name = "torge-forge-cli"
+path = "src/main.rs"
+
+[dependencies]
+# CLI argument parsing
+clap = { version = "4.5", features = ["derive"] }
+
+# Cryptography
+ed25519-dalek = { version = "2.1", features = ["rand_core"] }
+sha3 = "0.10"
+sha2 = "0.10"
+rand = "0.8"
+
+# Encoding
+data-encoding = "2.5"
+
+# Parallelism
+rayon = "1.8"
+
+# Serialization for metadata
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+
+# Date/time
+chrono = "0.4"
+
+# Error handling
+thiserror = "1.0"
+
+# Atomic operations
+crossbeam = "0.8"
+
+# Signal handling
+ctrlc = "3.4"
+
+# Hex encoding
+hex = "0.4"
+
+[dev-dependencies]
+assert_cmd = "2.0"
+predicates = "3.0"
+tempfile = "3.8"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
